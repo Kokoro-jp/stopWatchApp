@@ -1,0 +1,30 @@
+
+body{
+  margin: 0;
+  padding: 0;
+  margin:50px auto 0;
+  text-align: center;
+  width: 350px;
+}
+
+#timer{
+  margin: 30px auto;
+  font-size: 30px;
+  letter-spacing: 5px;
+}
+
+.container {
+  width: 400px;
+  height: 100px;
+}
+
+.buttons {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* 活性・非活性 */
+.inactive {
+  opacity: 0.6;
+}
