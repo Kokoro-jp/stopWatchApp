@@ -40,22 +40,22 @@ function setButtonStateInitial() {
 function setButtonStateRunning() {
   start.classList.add('inactive'); //非活性
   stop.classList.remove('inactive'); //活性
-  reset.classList.add('inactive'); //非活性
+  reset.classList.remove('inactive'); //活性にしたい
 }
 //活性非活性（タイマー一時停止中）
 function setButtonStateStoped() {
   start.classList.remove('inactive'); //活性
   stop.classList.add('inactive'); //非活性
-  reset.classList.remove('inactive'); //非活性
+  reset.classList.remove('inactive'); //活性
 }
 
 
-// スタートボタン
+// スタートボタン）
 start.addEventListener("click", () => {
   if (start.classList.contains('inactive') === true) {
     return;
   }
-  //タイマー動作させる
+  //タイマー動作させる →動作中の選択肢は常にストップorリセット
   setButtonStateRunning();
   startTime = Date.now();
   countUp();
@@ -66,20 +66,27 @@ stop.addEventListener("click", () => {
   if (stop.classList.contains('inactive') === true) {
     return;
   }
-  // タイマー停止する
+  // タイマー停止する →停止中の選択肢は常にスタートorリセット
   setButtonStateStoped();
   clearTimeout(timeoutid);
   elapsedTime += Date.now() - startTime;
   
 });
 
-// リセットボタン
+// リセットボタン（動作中ならリセット直後再スタート）
 reset.addEventListener("click", () => {
-  if (reset.classList.contains('inactive') === true) {
-    return;
-  }
-  // タイマーを初期状態にする
+  if (start.classList.contains('inactive') === true) {
+   setButtonStateRunning();
+   clearTimeout(timeoutid);
+   elapsedTime = 0;
+   startTime = Date.now();
+   countUp();
+   
+   }else{
+  // タイマー停止中なら初期値にリセット
   setButtonStateInitial();
   timer.textContent = '0:0:0:0';
   elapsedTime = 0;
+   }
+  
 });
