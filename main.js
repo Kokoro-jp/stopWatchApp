@@ -76,11 +76,12 @@ stop.addEventListener("click", () => {
 // リセットボタン（動作中ならリセット直後再スタート）
 reset.addEventListener("click", () => {
   if (start.classList.contains('inactive') === true) {
-   setButtonStateRunning();
+   setButtonStateInitial();
    clearTimeout(timeoutid);
    elapsedTime = 0;
-   startTime = Date.now();
-   countUp();
+   timer.textContent = '0:0:0:0';
+  // startTime = Date.now();
+  // countUp();
    
    }else{
   // タイマー停止中なら初期値にリセット
